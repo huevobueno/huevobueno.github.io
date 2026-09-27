@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Huevo Bueno · Tu zona te espera</title>
+  <meta name="description" content="Oportunidad de negocio con huevo fresco a domicilio. Zona exclusiva, ganancias recurrentes y sistema automatizado.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ============ HEADER FIJO ============ -->
+  <header class="header">
+    <div class="header__inner">
+      <div class="header__logo">
+        <span class="header__logo-icon">🥚</span>
+        <span class="header__logo-text">HUEVO BUENO</span>
+      </div>
+      <div class="header__badge">
+        Para <strong data-field="nombre">Saul</strong> · <span data-field="zona">Sayula</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ 1. HERO ============ -->
+    <section class="hero" id="hero">
+      <div class="container">
+        <p class="hero__eyebrow">Oportunidad exclusiva en <span data-field="zona">Sayula</span></p>
+        <h1 class="hero__title">
+          Hola, <span data-field="nombre">Saul</span>.<br>
+          Tu zona en <span data-field="zona">Sayula</span> te está esperando.
+        </h1>
+        <p class="hero__lead">
+          En <span data-field="zona">Sayula</span> hay <strong data-field="viviendas">9,148</strong> viviendas
+          y solo <strong data-field="viviendas_5">457</strong> familias necesitan que alguien les lleve
+          huevo fresco a su puerta. Ese alguien puedes ser tú.
+        </p>
+        <a class="cta cta--primary" data-cta="hero" href="#">
+          Apartar mi zona →
+        </a>
+        <p class="hero__note">Sin inversión inicial alta. Empiezas con 1 caja de prueba.</p>
+      </div>
+    </section>
+
+    <!-- ============ 2. MINA DE ORO ============ -->
+    <section class="section section--crema" id="mina">
+      <div class="container">
+        <h2 class="section__title">¿Por qué este negocio es una mina de oro para ti, <span data-field="nombre">Saul</span>?</h2>
+        <p class="section__lead">
+          ¿Por qué hay tortillerías por todos lados en <span data-field="zona">Sayula</span> y ves pasar tantas
+          motos repartiendo todo el día? Porque los alimentos de consumo diario se reparten a domicilio.
+          Con el huevo pasa exactamente lo mismo.
+        </p>
+
+        <div class="grid grid--3">
+          <article class="card">
+            <span class="card__num">01</span>
+            <h3 class="card__title">La costumbre ya existe</h3>
+            <p>En <span data-field="zona">Sayula</span> las familias ya reciben alimentos básicos en su puerta. Solo aplicamos ese modelo al alimento de mayor consumo en México.</p>
+          </article>
+          <article class="card">
+            <span class="card__num">02</span>
+            <h3 class="card__title">Nadie lo vende así</h3>
+            <p>Hoy nadie en <span data-field="zona">Sayula</span> lleva huevo fresco con ruta organizada, App y Chatbot. Tú serías el primero.</p>
+          </article>
+          <article class="card">
+            <span class="card__num">03</span>
+            <h3 class="card__title">Dinero recurrente</h3>
+            <p>Una familia no te compra una vez. Como se consume diario, te pide su cartera semana tras semana, mes tras mes.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3. MERCADO REAL ============ -->
+    <section class="section section--verde" id="mercado">
+      <div class="container">
+        <h2 class="section__title section__title--light">El mercado real en <span data-field="zona">Sayula</span></h2>
+        <p class="section__lead section__lead--light">
+          Son las 9 de la mañana. En cientos de casas de tu rumbo hay mamás preparando el almuerzo.
+          No necesitas conquistar todo el pueblo. Solo el 5%.
+        </p>
+
+        <div class="grid grid--3">
+          <div class="stat">
+            <span class="stat__num" data-field="viviendas">9,148</span>
+            <span class="stat__label">viviendas habitadas en <span data-field="zona">Sayula</span></span>
+          </div>
+          <div class="stat">
+            <span class="stat__num" data-field="viviendas_5">457</span>
+            <span class="stat__label">familias = tu meta del 5%</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num" data-field="cajas_semanales">38</span>
+            <span class="stat__label">cajas semanales estimadas</span>
+          </div>
+        </div>
+
+        <p class="mercado__nota">
+          Con un margen promedio de <strong>$120 a $240 MXN libres por caja</strong>, atender solo esa fracción
+          te genera entre <strong>$4,500 y $9,000 MXN libres cada 12 días</strong> directo a tu bolsillo.
+        </p>
+      </div>
+    </section>
+
+      <!-- ============ 4. CALCULADORA ============ -->
+    <section class="section section--crema" id="calculadora">
+      <div class="container">
+        <h2 class="section__title">Calcula tu ganancia, <span data-field="nombre">Saul</span></h2>
+        <p class="section__lead">Mueve el slider según las familias que quieras atender en <span data-field="zona">Sayula</span>.</p>
+
+        <div class="calc">
+          <label class="calc__label" for="slider-familias">
+            FAMILIAS QUE QUIERES ATENDER EN <span data-field="zona">SAYULA</span>
+          </label>
+          <input type="range" id="slider-familias" class="calc__slider" min="10" max="457" value="457" step="1">
+          <div class="calc__marks">
+            <span>10</span>
+            <span id="slider-value" class="calc__value">457 familias</span>
+            <span data-field="viviendas_5">457</span>
+          </div>
+
+          <div class="calc__outputs">
+            <div class="calc__out">
+              <span class="calc__out-label">CAJAS / SEMANA</span>
+              <span class="calc__out-num" id="calc-cajas">38</span>
+            </div>
+            <div class="calc__out">
+              <span class="calc__out-label">GANANCIA 12 DÍAS</span>
+              <span class="calc__out-num" id="calc-ganancia">$4,560 – $9,120</span>
+            </div>
+          </div>
+
+          <a class="cta cta--primary calc__cta" data-cta="calculadora" href="#" hidden>
+            Apartar mi zona →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. MAMÁ DIGITAL ============ -->
+    <section class="section section--crema-alt" id="mama-digital">
+      <div class="container">
+        <h2 class="section__title">Tu cliente: la Mamá Digital de <span data-field="zona">Sayula</span></h2>
+        <p class="section__lead">
+          Ella administra la despensa entre el trabajo, los niños y las vueltas del día.
+          Tres problemas que tú le resuelves:
+        </p>
+        <ul class="bullets">
+          <li><strong>Cero incomodidad.</strong> No carga carteras en el camión ni camina desde la tienda.</li>
+          <li><strong>Frescura garantizada.</strong> Huevo directo de granja, no de bodega.</li>
+          <li><strong>Atención en 5 segundos.</strong> Pide por WhatsApp mientras cocina y tú se lo llevas.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 6. MECÁNICA + 3 ETAPAS ============ -->
+    <section class="section section--verde" id="mecanica">
+      <div class="container">
+        <h2 class="section__title section__title--light">Cómo funciona el sistema en <span data-field="zona">Sayula</span></h2>
+
+        <div class="mecanica">
+          <div class="mecanica__block">
+            <h3 class="mecanica__sub">Mecánica del cono</h3>
+            <ul class="bullets bullets--light">
+              <li>1 caja = 360 huevos = 12 conos de 30 piezas.</li>
+              <li>Una familia compra 1 o 2 conos por semana.</li>
+              <li>Caja a $600 · Cono te cuesta $50.</li>
+              <li>Vendes entre $60 y $70 · Ganas $120 a $240 por caja.</li>
+              <li>Tú decides el precio final en <span data-field="zona">Sayula</span>.</li>
+            </ul>
+          </div>
+
+          <div class="mecanica__block">
+            <h3 class="mecanica__sub">Tus 3 etapas de crecimiento</h3>
+            <ol class="steps">
+              <li><strong>Paso 1 · Validación.</strong> Compras 1 caja, la repartes entre vecinos y contactos. Repites hasta acumular 7 cajas vendidas.</li>
+              <li><strong>Paso 2 · Alta en la App.</strong> Confirmas tu precio y te damos acceso al sistema con tus números.</li>
+              <li><strong>Paso 3 · Publicidad pagada.</strong> Lanzamos campañas en Facebook e Instagram en <span data-field="zona">Sayula</span>. El Chatbot capta pedidos y te los manda a la App.</li>
+            </ol>
+          </div>
+
+          <div class="mecanica__block">
+            <h3 class="mecanica__sub">Pasos inmediatos para <span data-field="nombre">Saul</span></h3>
+            <ul class="bullets bullets--light">
+              <li>Confirma tu colonia o sector inicial en <span data-field="zona">Sayula</span>.</li>
+              <li>Surte tu primera caja de prueba.</li>
+              <li>Mueve tus primeros 12 conos entre tus contactos.</li>
+              <li>Al llegar a la caja 7, activamos tu Bot y la publicidad.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 7. FAQ ============ -->
+    <section class="section section--crema" id="faq">
+      <div class="container">
+        <h2 class="section__title">Preguntas frecuentes</h2>
+
+        <div class="faq">
+          <details class="faq__item" data-faq="moto">
+            <summary>¿Necesito moto para empezar?</summary>
+            <p>No es obligatorio. Puedes iniciar con bici, a pie en tu colonia, o incluso en auto. Conforme crezca tu ruta, una moto te acelera las entregas, pero no es requisito para arrancar.</p>
+          </details>
+          <details class="faq__item" data-faq="inversion">
+            <summary>¿Cuánto es la inversión inicial?</summary>
+            <p>Empiezas comprando 1 caja de prueba (aproximadamente $600 MXN). La repartes, cobras tu ganancia y reinviertes. No pagas cuota, no hay membresía.</p>
+          </details>
+          <details class="faq__item" data-faq="multinivel">
+            <summary>¿Es multinivel o venta directa?</summary>
+            <p>Venta directa. Tú compras, tú repartes, tú cobras. No dependes de reclutar a nadie para ganar.</p>
+          </details>
+          <details class="faq__item" data-faq="roto">
+            <summary>¿Qué pasa si un huevo sale roto?</summary>
+            <p>Lo repones en el siguiente pedido sin pretextos. Eso genera lealtad inmediata con tus clientes.</p>
+          </details>
+          <details class="faq__item" data-faq="ganancia">
+            <summary>¿Cuánto puedo ganar a la semana?</summary>
+            <p>Depende de las familias que atiendas. Con 100 familias son 9 cajas/semana ($1,080 – $2,160 cada 12 días). Con las 457 familias de tu 5% son 38 cajas/semana ($4,500 – $9,000 cada 12 días).</p>
+          </details>
+          <details class="faq__item" data-faq="colonias">
+            <summary>¿Puedo elegir mis colonias?</summary>
+            <p>Sí. Tú decides qué colonias de <span data-field="zona">Sayula</span> quieres trabajar. Si alguna ya está ocupada por otro repartidor, te ofrecemos otras disponibles.</p>
+          </details>
+          <details class="faq__item" data-faq="publicidad">
+            <summary>¿Cuándo me activan la publicidad pagada?</summary>
+            <p>Al completar tus 7 cajas vendidas por tu cuenta. En ese momento activamos tu Bot y las campañas en Facebook e Instagram dirigidas a <span data-field="zona">Sayula</span>.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    
+<!-- ============ 8. PRUEBA SOCIAL ============ -->
+    <section class="section section--crema-alt" id="prueba">
+      <div class="container">
+        <h2 class="section__title">Lo que dicen repartidores y clientes</h2>
+        <p class="section__lead">Conversaciones reales de rutas activas.</p>
+
+        <div class="prueba__grid">
+          <figure class="prueba__item"><img src="Alondra.png" alt="Conversación con cliente satisfecho" loading="lazy"></figure>
+          <figure class="prueba__item"><img src="Ramon.png" alt="Repartidor pidiendo más producto" loading="lazy"></figure>
+          <figure class="prueba__item"><img src="Joge.png" alt="Cliente confirmando calidad del producto" loading="lazy"></figure>
+          <figure class="prueba__item prueba__item--foto"><img src="cajas-huevos.jpg" alt="Cajas de huevo listas para reparto" loading="lazy"></figure>
+          <figure class="prueba__item prueba__item--foto"><img src="conos-huevos.jpg" alt="Producto empacado en cartón" loading="lazy"></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 9. CTA FINAL ============ -->
+    <section class="section section--dorado" id="cta-final">
+      <div class="container cta-final">
+        <h2 class="cta-final__title">
+          🚀 ¿Listo para apartar tu zona, <span data-field="nombre">Saul</span>?
+        </h2>
+        <p class="cta-final__text">
+          Si ya revisaste los números y quieres iniciar tu registro oficial como distribuidor
+          exclusivo en <span data-field="zona">Sayula</span>, toca el botón y te contactamos por WhatsApp.
+        </p>
+        <a class="cta cta--dark" data-cta="final" href="#">
+          Completar mi registro →
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>🥚 <strong>Huevo Bueno</strong> · Red de distribución en <span data-field="zona">Sayula</span></p>
+      <p>WhatsApp: <a href="https://wa.me/523325110628">332 511 0628</a></p>
+      <p class="footer__small">© 2026 Huevo Bueno · Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- ============ BOTÓN WHATSAPP FLOTANTE ============ -->
+  <a class="wapp" data-cta="flotante" href="#" aria-label="Contactar por WhatsApp">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true">
+      <path d="M20.52 3.48A11.9 11.9 0 0 0 12.04 0C5.46 0 .1 5.36.1 11.94c0 2.1.55 4.15 1.6 5.96L0 24l6.28-1.65a11.9 11.9 0 0 0 5.75 1.47h.01c6.58 0 11.94-5.36 11.94-11.94 0-3.19-1.24-6.19-3.46-8.4zM12.04 21.8h-.01a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.73.98 1-3.64-.24-.37a9.87 9.87 0 0 1-1.51-5.24c0-5.46 4.44-9.9 9.9-9.9 2.64 0 5.13 1.03 7 2.9a9.84 9.84 0 0 1 2.9 7c0 5.46-4.44 9.9-9.9 9.9zm5.43-7.42c-.3-.15-1.77-.87-2.04-.97-.28-.1-.48-.15-.68.15-.2.3-.78.97-.96 1.17-.18.2-.35.22-.65.08-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.78-1.68-2.08-.18-.3-.02-.46.13-.6.13-.13.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.03-.53-.08-.15-.68-1.63-.93-2.23-.24-.58-.5-.5-.68-.51l-.58-.01c-.2 0-.53.08-.8.38-.28.3-1.05 1.03-1.05 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.18-1.42-.08-.13-.28-.2-.58-.35z"/>
+    </svg>
+  </a>
+
+
+  <script src="js/script.js"></script>
+</body>
+</html>
