@@ -203,8 +203,6 @@
         var gracias = document.getElementById('gracias');
         gracias.hidden = false;
         gracias.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-        track('formulario_enviado');
       }, 300);
     });
   }
