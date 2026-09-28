@@ -1,6 +1,7 @@
 /* =========================================================
-   HUEVO BUENO · Landing personalizada v2
-   - Formulario + página de gracias
+   HUEVO BUENO · Landing personalizada v3
+   - Formulario siempre visible en sección dorada
+   - Página de gracias con 3 botones
    - Tracking completo
    ========================================================= */
 
@@ -18,6 +19,7 @@
     id:          params.get('id')          || 'TEST-000',
     nombre:      params.get('nombre')      || 'Saul',
     zona:        params.get('zona')        || 'Sayula',
+    telefono:    params.get('telefono')    || '',
     viviendas:   parseInt(params.get('viviendas') || '9148', 10),
     viviendas_5: parseInt(params.get('viviendas_5') || '457', 10)
   };
@@ -114,26 +116,19 @@
     });
   }
 
-  // -------- 5. CTAs QUE ABREN EL FORMULARIO --------
+  // -------- 5. CTA CALCULADORA (scroll al formulario) --------
   function inicializarCtas() {
-    var botones = document.querySelectorAll('[data-cta="calculadora"], [data-cta="final"]');
+    var botones = document.querySelectorAll('[data-cta="calculadora"]');
     botones.forEach(function (btn) {
       btn.setAttribute('href', '#formulario');
       btn.addEventListener('click', function (e) {
         e.preventDefault();
-        abrirFormulario();
+        var form = document.getElementById('formulario');
+        if (!form) return;
+        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        track('clic_cta_whatsapp', { seccion_origen: 'calculadora' });
       });
     });
-  }
-
-  function abrirFormulario() {
-    var form = document.getElementById('formulario');
-    var gracias = document.getElementById('gracias');
-    if (!form) return;
-    if (gracias) gracias.hidden = true;
-    form.hidden = false;
-    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    track('formulario_abierto');
   }
 
   // -------- 6. FORMULARIO --------
@@ -141,19 +136,17 @@
     var form = document.getElementById('form-calificado');
     if (!form) return;
 
-    // Prellenar campos
     var inputNombre = document.getElementById('f-nombre');
     var inputWa = document.getElementById('f-whatsapp');
     var inputCiudad = document.getElementById('f-ciudad');
 
     if (inputNombre) inputNombre.value = datos.nombre;
     if (inputCiudad) inputCiudad.value = datos.zona;
-    // WhatsApp no viene del URL, queda vacío
+    if (inputWa && datos.telefono) inputWa.value = datos.telefono;
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      // 🛡️ ANTI-DOBLE-ENVÍO
       if (form.dataset.enviando === '1') return;
       form.dataset.enviando = '1';
 
@@ -180,7 +173,6 @@
       if (!cajas) return falloValidacion('Selecciona cuántas cajas quieres.');
       if (!cuando) return falloValidacion('Selecciona cuándo puedes iniciar.');
 
-      // Deshabilitar botón para evitar segundo clic
       var btn = form.querySelector('button[type="submit"]');
       if (btn) {
         btn.disabled = true;
@@ -202,15 +194,16 @@
       if (DEBUG) console.log('[form]', payload);
       enviarWebhook(payload);
 
-      // Guardar en memoria para los botones de gracias
       window.__leadCalificado = payload;
 
-      // Mostrar sección gracias con pequeño delay
       setTimeout(function () {
-        form.parentElement.parentElement.hidden = true;
+        var bloqueForm = document.getElementById('bloque-form');
+        if (bloqueForm) bloqueForm.hidden = true;
+
         var gracias = document.getElementById('gracias');
         gracias.hidden = false;
         gracias.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
         track('formulario_enviado');
       }, 300);
     });
@@ -238,10 +231,8 @@
         var texto = mensajes[metodo] || mensajes['WhatsApp'];
         var url = 'https://wa.me/' + WHATSAPP_NUMERO + '?text=' + encodeURIComponent(texto);
 
-        // Registrar el clic ANTES de abrir WhatsApp
         track('clic_metodo_' + metodo.toLowerCase(), { metodo: metodo });
 
-        // También avisar al Apps Script que el lead eligió método (dispara plantilla Meta)
         enviarWebhook({
           id_registro: datos.id,
           evento: 'metodo_elegido',
@@ -254,7 +245,6 @@
           timestamp: new Date().toISOString()
         });
 
-        // Abrir WhatsApp (con pequeño delay para que el POST anterior salga)
         setTimeout(function () {
           window.open(url, '_blank');
         }, 300);
@@ -290,15 +280,12 @@
 
   // -------- 9. SCROLL --------
   function inicializarScrollTracking() {
-    var maxScroll = 0;
     var umbrales = { 25: false, 50: false, 75: false, 100: false };
 
     function evaluar() {
       var alto = document.documentElement.scrollHeight - window.innerHeight;
       if (alto <= 0) return;
       var pct = Math.min(100, Math.round((window.scrollY / alto) * 100));
-
-      if (pct > maxScroll) maxScroll = pct;
 
       [25, 50, 75, 100].forEach(function (u) {
         if (!umbrales[u] && pct >= u) {
