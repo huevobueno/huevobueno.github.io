@@ -251,70 +251,61 @@
       </div>
     </section>
 
-    <!-- ============ 9. CTA FINAL ============ -->
-    <section class="section section--dorado" id="cta-final">
-      <div class="container cta-final">
-        <h2 class="cta-final__title">
-          🚀 ¿Listo para apartar tu zona, <span data-field="nombre">Saul</span>?
-        </h2>
-        <p class="cta-final__text">
-          Si ya revisaste los números y quieres iniciar tu registro oficial como distribuidor
-          exclusivo en <span data-field="zona">Sayula</span>, toca el botón y te contactamos por WhatsApp.
-        </p>
-        <a class="cta cta--dark" data-cta="final" href="#">
-          Completar mi registro →
-        </a>
-      </div>
     
-    </section>
+    <!-- ============ 9. CTA FINAL + FORMULARIO ============ -->
+    <section class="section section--dorado" id="formulario">
+      <div class="container cta-final">
+        <div id="bloque-form">
+          <h2 class="cta-final__title">
+            🚀 ¿Listo para apartar tu zona, <span data-field="nombre">Saul</span>?
+          </h2>
+          <p class="cta-final__text">
+            Si ya revisaste los números y quieres iniciar tu registro oficial como distribuidor
+            exclusivo en <span data-field="zona">Sayula</span>, completa tus datos:
+          </p>
 
-    <!-- ============ FORMULARIO CALIFICADO ============ -->
-    <section class="section section--crema" id="formulario" hidden>
-      <div class="container">
-        <h2 class="section__title">Aparta tu zona, <span data-field="nombre">Saul</span></h2>
-        <p class="section__lead">Completa tus datos para coordinar tu ruta piloto.</p>
-
-        <form class="formulario" id="form-calificado" novalidate>
-          <div class="form__group">
-            <label for="f-nombre">Nombre completo</label>
-            <input type="text" id="f-nombre" name="nombre" required>
-          </div>
-
-          <div class="form__group">
-            <label for="f-whatsapp">WhatsApp</label>
-            <input type="tel" id="f-whatsapp" name="whatsapp" required inputmode="numeric">
-          </div>
-
-          <div class="form__group">
-            <label for="f-ciudad">Ciudad</label>
-            <input type="text" id="f-ciudad" name="ciudad" required>
-          </div>
-
-          <div class="form__group">
-            <label for="f-colonia">Colonia donde quieres repartir</label>
-            <input type="text" id="f-colonia" name="colonia" required placeholder="Ej: Centro, Camino Real...">
-          </div>
-
-          <div class="form__group">
-            <label>¿Listo para invertir?</label>
-            <div class="form__options">
-              <label class="form__radio"><input type="radio" name="cajas" value="1 caja" required> 1 caja</label>
-              <label class="form__radio"><input type="radio" name="cajas" value="2 cajas"> 2 cajas</label>
-              <label class="form__radio"><input type="radio" name="cajas" value="3 cajas o más"> 3 cajas o más</label>
+          <form class="formulario" id="form-calificado" novalidate>
+            <div class="form__group">
+              <label for="f-nombre">Nombre completo</label>
+              <input type="text" id="f-nombre" name="nombre" required>
             </div>
-          </div>
 
-          <div class="form__group">
-            <label>¿Cuándo puedes iniciar?</label>
-            <div class="form__options">
-              <label class="form__radio"><input type="radio" name="cuando" value="De inmediato" required> De inmediato</label>
-              <label class="form__radio"><input type="radio" name="cuando" value="Esta semana"> Esta semana</label>
+            <div class="form__group">
+              <label for="f-whatsapp">WhatsApp</label>
+              <input type="tel" id="f-whatsapp" name="whatsapp" required inputmode="numeric">
             </div>
-          </div>
 
-          <button type="submit" class="cta cta--primary form__submit">Enviar y continuar →</button>
-          <p class="form__error" id="form-error" hidden></p>
-        </form>
+            <div class="form__group">
+              <label for="f-ciudad">Ciudad</label>
+              <input type="text" id="f-ciudad" name="ciudad" required>
+            </div>
+
+            <div class="form__group">
+              <label for="f-colonia">Colonia donde quieres repartir</label>
+              <input type="text" id="f-colonia" name="colonia" required placeholder="Ej: Centro, Camino Real...">
+            </div>
+
+            <div class="form__group">
+              <label>¿Listo para invertir?</label>
+              <div class="form__options">
+                <label class="form__radio"><input type="radio" name="cajas" value="1 caja" required> 1 caja</label>
+                <label class="form__radio"><input type="radio" name="cajas" value="2 cajas"> 2 cajas</label>
+                <label class="form__radio"><input type="radio" name="cajas" value="3 cajas o más"> 3 cajas o más</label>
+              </div>
+            </div>
+
+            <div class="form__group">
+              <label>¿Cuándo puedes iniciar?</label>
+              <div class="form__options">
+                <label class="form__radio"><input type="radio" name="cuando" value="De inmediato" required> De inmediato</label>
+                <label class="form__radio"><input type="radio" name="cuando" value="Esta semana"> Esta semana</label>
+              </div>
+            </div>
+
+            <button type="submit" class="cta cta--dark form__submit">Enviar y continuar →</button>
+            <p class="form__error" id="form-error" hidden></p>
+          </form>
+        </div>
       </div>
     </section>
 
