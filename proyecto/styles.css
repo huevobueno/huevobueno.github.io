@@ -472,6 +472,7 @@ li { margin-bottom: 8px; }
 .cta-final {
   text-align: center;
   max-width: 720px;
+  margin: 0 auto;
 }
 
 .cta-final__title {
@@ -496,32 +497,6 @@ li { margin-bottom: 8px; }
 .footer a { color: #E9C46A; }
 .footer__small { font-size: 0.78rem; opacity: 0.7; margin-top: 16px; }
 
-/* ============ WHATSAPP FLOTANTE ============ */
-.wapp {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
-  background-color: #25D366;
-  color: #FFFFFF;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-  z-index: 100;
-  opacity: 0;
-  transform: translateY(20px);
-  pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-.wapp.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-.wapp:hover { transform: translateY(-3px); }
 
 /* ============ RESPONSIVE ============ */
 @media (max-width: 780px) {
@@ -538,6 +513,7 @@ li { margin-bottom: 8px; }
   .calc { padding: 24px 18px; }
 }
 
+
 /* ============ FORMULARIO CALIFICADO ============ */
 .formulario {
   max-width: 560px;
@@ -546,7 +522,8 @@ li { margin-bottom: 8px; }
   border: 1px solid rgba(18, 55, 42, 0.1);
   border-radius: 16px;
   padding: 32px 28px;
-  box-shadow: 0 4px 0 rgba(18, 55, 42, 0.06);
+  box-shadow: 0 4px 0 rgba(18, 55, 42, 0.15);
+  text-align: left;
 }
 
 .form__group { margin-bottom: 20px; }
@@ -626,6 +603,7 @@ li { margin-bottom: 8px; }
 .gracias {
   text-align: center;
   max-width: 640px;
+  margin: 0 auto;
 }
 
 .gracias__check {
