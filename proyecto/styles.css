@@ -537,3 +537,124 @@ li { margin-bottom: 8px; }
   .prueba__grid { grid-template-columns: 1fr; }
   .calc { padding: 24px 18px; }
 }
+
+/* ============ FORMULARIO CALIFICADO ============ */
+.formulario {
+  max-width: 560px;
+  margin: 0 auto;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(18, 55, 42, 0.1);
+  border-radius: 16px;
+  padding: 32px 28px;
+  box-shadow: 0 4px 0 rgba(18, 55, 42, 0.06);
+}
+
+.form__group { margin-bottom: 20px; }
+
+.form__group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #12372A;
+  margin-bottom: 8px;
+  letter-spacing: 0.03em;
+}
+
+.form__group input[type="text"],
+.form__group input[type="tel"] {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid #D5CFC0;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #12372A;
+  background-color: #F8F5ED;
+  transition: border-color 0.15s ease;
+}
+
+.form__group input[type="text"]:focus,
+.form__group input[type="tel"]:focus {
+  outline: none;
+  border-color: #12372A;
+  background-color: #FFFFFF;
+}
+
+.form__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.form__radio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1.5px solid #D5CFC0;
+  border-radius: 8px;
+  background-color: #F8F5ED;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.15s ease;
+}
+
+.form__radio:has(input:checked) {
+  border-color: #12372A;
+  background-color: #E9C46A;
+  font-weight: 600;
+}
+
+.form__radio input { accent-color: #12372A; }
+
+.form__submit {
+  width: 100%;
+  margin-top: 8px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.form__error {
+  margin-top: 12px;
+  color: #B23A2E;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* ============ GRACIAS ============ */
+.gracias {
+  text-align: center;
+  max-width: 640px;
+}
+
+.gracias__check {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+
+.gracias__title {
+  color: #F8F5ED;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin-bottom: 16px;
+}
+
+.gracias__text {
+  color: #E5DFCE;
+  font-size: 1.05rem;
+  margin-bottom: 36px;
+}
+
+.gracias__botones {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.gracias__btn {
+  display: block;
+  text-align: center;
+  font-size: 1rem;
+}

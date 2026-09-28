@@ -1,9 +1,7 @@
 /* =========================================================
-   HUEVO BUENO · Landing personalizada
-   - Lee parámetros del URL
-   - Reemplaza placeholders
-   - Calculadora interactiva
-   - Tracking de eventos
+   HUEVO BUENO · Landing personalizada v2
+   - Formulario + página de gracias
+   - Tracking completo
    ========================================================= */
 
 (function () {
@@ -25,7 +23,7 @@
   };
   datos.cajas_semanales = Math.floor(datos.viviendas_5 / 12);
 
-  // -------- 2. REEMPLAZAR PLACEHOLDERS EN EL DOM --------
+  // -------- 2. REEMPLAZAR PLACEHOLDERS --------
   function formatearNumero(n) {
     return n.toLocaleString('es-MX');
   }
@@ -45,7 +43,6 @@
   }
 
   // -------- 3. CALCULADORA --------
-   // -------- 3. CALCULADORA --------
   function inicializarCalculadora() {
     var slider = document.getElementById('slider-familias');
     var valor = document.getElementById('slider-value');
@@ -55,7 +52,6 @@
 
     if (!slider) return;
 
-    // Configurar min/max de forma adaptativa
     var maxFamilias = Math.max(datos.viviendas_5, 100);
     slider.min = 10;
     slider.max = maxFamilias;
@@ -73,7 +69,6 @@
       cajas.textContent = cajasSem;
       ganancia.textContent = '$' + formatearNumero(ganMin) + ' – $' + formatearNumero(ganMax);
 
-      // Mostrar CTA solo después del primer movimiento
       if (!yaMovio && ctaCalc) {
         ctaCalc.removeAttribute('hidden');
         void ctaCalc.offsetWidth;
@@ -85,13 +80,10 @@
       calcular();
       if (!yaMovio) {
         yaMovio = true;
-        track('clic_calculadora', {
-          familias_seleccionadas: parseInt(slider.value, 10)
-        });
+        track('clic_calculadora', { familias_seleccionadas: parseInt(slider.value, 10) });
       }
     });
 
-    // Registra también cada cambio con debounce ligero
     var timer = null;
     slider.addEventListener('change', function () {
       clearTimeout(timer);
@@ -122,29 +114,155 @@
     });
   }
 
-  // -------- 5. CTAs A WHATSAPP --------
-  function construirUrlWhatsApp() {
-    var texto = 'Hola, soy ' + datos.nombre + ' de ' + datos.zona +
-                '. Vi la info (ID: ' + datos.id + ') y quiero apartar mi zona.';
-    return 'https://wa.me/' + WHATSAPP_NUMERO + '?text=' + encodeURIComponent(texto);
-  }
-
+  // -------- 5. CTAs QUE ABREN EL FORMULARIO --------
   function inicializarCtas() {
-    var url = construirUrlWhatsApp();
-    var botones = document.querySelectorAll('[data-cta]');
+    var botones = document.querySelectorAll('[data-cta="calculadora"], [data-cta="final"]');
     botones.forEach(function (btn) {
-      btn.setAttribute('href', url);
-      btn.setAttribute('target', '_blank');
-      btn.setAttribute('rel', 'noopener');
-      btn.addEventListener('click', function () {
-        track('clic_cta_whatsapp', {
-          seccion_origen: btn.getAttribute('data-cta')
-        });
+      btn.setAttribute('href', '#formulario');
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        abrirFormulario();
       });
     });
   }
 
-  // -------- 6. TRACKING DE SCROLL + TIEMPO --------
+  function abrirFormulario() {
+    var form = document.getElementById('formulario');
+    var gracias = document.getElementById('gracias');
+    if (!form) return;
+    if (gracias) gracias.hidden = true;
+    form.hidden = false;
+    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    track('formulario_abierto');
+  }
+
+  // -------- 6. FORMULARIO --------
+  function inicializarFormulario() {
+    var form = document.getElementById('form-calificado');
+    if (!form) return;
+
+    // Prellenar campos
+    var inputNombre = document.getElementById('f-nombre');
+    var inputWa = document.getElementById('f-whatsapp');
+    var inputCiudad = document.getElementById('f-ciudad');
+
+    if (inputNombre) inputNombre.value = datos.nombre;
+    if (inputCiudad) inputCiudad.value = datos.zona;
+    // WhatsApp no viene del URL, queda vacío
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // 🛡️ ANTI-DOBLE-ENVÍO
+      if (form.dataset.enviando === '1') return;
+      form.dataset.enviando = '1';
+
+      var errEl = document.getElementById('form-error');
+      errEl.hidden = true;
+
+      var nombre = (inputNombre.value || '').trim();
+      var whatsapp = (inputWa.value || '').replace(/\D/g, '');
+      var ciudad = (inputCiudad.value || '').trim();
+      var colonia = (document.getElementById('f-colonia').value || '').trim();
+      var cajas = form.querySelector('input[name="cajas"]:checked');
+      var cuando = form.querySelector('input[name="cuando"]:checked');
+
+      function falloValidacion(msg) {
+        form.dataset.enviando = '';
+        errEl.textContent = msg;
+        errEl.hidden = false;
+      }
+
+      if (!nombre || nombre.length < 2) return falloValidacion('Escribe tu nombre completo.');
+      if (!whatsapp || whatsapp.length < 10) return falloValidacion('Escribe un WhatsApp válido (10 dígitos).');
+      if (!ciudad) return falloValidacion('Escribe tu ciudad.');
+      if (!colonia) return falloValidacion('Escribe tu colonia.');
+      if (!cajas) return falloValidacion('Selecciona cuántas cajas quieres.');
+      if (!cuando) return falloValidacion('Selecciona cuándo puedes iniciar.');
+
+      // Deshabilitar botón para evitar segundo clic
+      var btn = form.querySelector('button[type="submit"]');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Enviando...';
+      }
+
+      var payload = {
+        id_registro: datos.id,
+        evento: 'formulario_enviado',
+        nombre: nombre,
+        whatsapp: whatsapp,
+        ciudad: ciudad,
+        colonia: colonia,
+        cajas: cajas.value,
+        cuando_inicia: cuando.value,
+        timestamp: new Date().toISOString()
+      };
+
+      if (DEBUG) console.log('[form]', payload);
+      enviarWebhook(payload);
+
+      // Guardar en memoria para los botones de gracias
+      window.__leadCalificado = payload;
+
+      // Mostrar sección gracias con pequeño delay
+      setTimeout(function () {
+        form.parentElement.parentElement.hidden = true;
+        var gracias = document.getElementById('gracias');
+        gracias.hidden = false;
+        gracias.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        track('formulario_enviado');
+      }, 300);
+    });
+  }
+
+  // -------- 7. BOTONES DE GRACIAS --------
+  function inicializarGracias() {
+    var botones = document.querySelectorAll('.gracias__btn');
+    botones.forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        var metodo = btn.getAttribute('data-metodo');
+        var lead = window.__leadCalificado || {};
+
+        var nombre = lead.nombre || datos.nombre;
+        var ciudad = lead.ciudad || datos.zona;
+        var id = datos.id;
+
+        var mensajes = {
+          'WhatsApp': 'Hola, soy ' + nombre + ' de ' + ciudad + '. Acabo de llenar el formulario (ID: ' + id + ') y quiero hablar contigo por WhatsApp para coordinar mi ruta.',
+          'Videollamada': 'Hola, soy ' + nombre + ' de ' + ciudad + '. Quiero AGENDAR UNA VIDEOLAMADA para ver los detalles de mi ruta (ID: ' + id + ').',
+          'Visita': 'Hola, soy ' + nombre + ' de ' + ciudad + '. Quiero AGENDAR UNA VISITA A MI DOMICILIO para ver los detalles de mi ruta (ID: ' + id + ').'
+        };
+
+        var texto = mensajes[metodo] || mensajes['WhatsApp'];
+        var url = 'https://wa.me/' + WHATSAPP_NUMERO + '?text=' + encodeURIComponent(texto);
+
+        // Registrar el clic ANTES de abrir WhatsApp
+        track('clic_metodo_' + metodo.toLowerCase(), { metodo: metodo });
+
+        // También avisar al Apps Script que el lead eligió método (dispara plantilla Meta)
+        enviarWebhook({
+          id_registro: datos.id,
+          evento: 'metodo_elegido',
+          metodo: metodo,
+          nombre: nombre,
+          ciudad: ciudad,
+          colonia: lead.colonia || '',
+          cajas: lead.cajas || '',
+          cuando_inicia: lead.cuando_inicia || '',
+          timestamp: new Date().toISOString()
+        });
+
+        // Abrir WhatsApp (con pequeño delay para que el POST anterior salga)
+        setTimeout(function () {
+          window.open(url, '_blank');
+        }, 300);
+      });
+    });
+  }
+
+  // -------- 8. TRACKING --------
   function track(evento, extra) {
     var payload = Object.assign({
       id_registro: datos.id,
@@ -155,9 +273,11 @@
     }, extra || {});
 
     if (DEBUG) console.log('[track]', payload);
+    enviarWebhook(payload);
+  }
 
+  function enviarWebhook(payload) {
     if (!WEBHOOK_URL) return;
-
     try {
       fetch(WEBHOOK_URL, {
         method: 'POST',
@@ -168,19 +288,22 @@
     } catch (e) { /* noop */ }
   }
 
+  // -------- 9. SCROLL --------
   function inicializarScrollTracking() {
-    var marcados = { 25: false, 50: false, 75: false, 100: false };
+    var maxScroll = 0;
+    var umbrales = { 25: false, 50: false, 75: false, 100: false };
 
     function evaluar() {
       var alto = document.documentElement.scrollHeight - window.innerHeight;
       if (alto <= 0) return;
       var pct = Math.min(100, Math.round((window.scrollY / alto) * 100));
 
-      [25, 50, 75, 100].forEach(function (umbral) {
-        if (!marcados[umbral] && pct >= umbral) {
-          marcados[umbral] = true;
-          track('scroll_' + umbral);
-          if (umbral === 25) revelarWapp();
+      if (pct > maxScroll) maxScroll = pct;
+
+      [25, 50, 75, 100].forEach(function (u) {
+        if (!umbrales[u] && pct >= u) {
+          umbrales[u] = true;
+          track('scroll_max', { valor: u });
         }
       });
     }
@@ -189,11 +312,7 @@
     evaluar();
   }
 
-  function revelarWapp() {
-    var wapp = document.querySelector('.wapp');
-    if (wapp) wapp.classList.add('is-visible');
-  }
-
+  // -------- 10. TIEMPO --------
   function inicializarTiempoTracking() {
     [15, 30, 60].forEach(function (seg) {
       setTimeout(function () {
@@ -202,7 +321,7 @@
     });
   }
 
-  // -------- 7. PAGEVIEW --------
+  // -------- 11. PAGEVIEW --------
   function inicializarPageview() {
     track('pageview', {
       viviendas: datos.viviendas,
@@ -210,12 +329,14 @@
     });
   }
 
-  // -------- 8. ARRANQUE --------
+  // -------- 12. ARRANQUE --------
   document.addEventListener('DOMContentLoaded', function () {
     reemplazarPlaceholders();
     inicializarCalculadora();
     inicializarFaq();
     inicializarCtas();
+    inicializarFormulario();
+    inicializarGracias();
     inicializarScrollTracking();
     inicializarTiempoTracking();
     inicializarPageview();

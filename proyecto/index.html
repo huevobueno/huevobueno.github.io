@@ -40,9 +40,7 @@
           y solo <strong data-field="viviendas_5">457</strong> familias necesitan que alguien les lleve
           huevo fresco a su puerta. Ese alguien puedes ser tú.
         </p>
-        <a class="cta cta--primary" data-cta="hero" href="#">
-          Apartar mi zona →
-        </a>
+      
         <p class="hero__note">Sin inversión inicial alta. Empiezas con 1 caja de prueba.</p>
       </div>
     </section>
@@ -237,20 +235,19 @@
     </section>
 
     
-<!-- ============ 8. PRUEBA SOCIAL ============ -->
+    <!-- ============ 8. PRUEBA SOCIAL ============ -->
     <section class="section section--crema-alt" id="prueba">
       <div class="container">
         <h2 class="section__title">Lo que dicen repartidores y clientes</h2>
         <p class="section__lead">Conversaciones reales de rutas activas.</p>
 
-       <div class="prueba__grid">
-  <figure class="prueba__item"><img src="img/Alondra.png" alt="Conversación con cliente satisfecho" loading="lazy"></figure>
-  <figure class="prueba__item"><img src="img/Ramon.png" alt="Repartidor pidiendo más producto" loading="lazy"></figure>
-  <figure class="prueba__item"><img src="img/Joge.png" alt="Cliente confirmando calidad del producto" loading="lazy"></figure>
-  <figure class="prueba__item prueba__item--foto"><img src="img/cajas-huevos.jpg" alt="Cajas de huevo listas para reparto" loading="lazy"></figure>
-  <figure class="prueba__item prueba__item--foto"><img src="img/conos-huevos.jpg" alt="Producto empacado en cartón" loading="lazy"></figure>
-</div>
-
+        <div class="prueba__grid">
+          <figure class="prueba__item"><img src="img/Alondra.png" alt="Conversación con cliente satisfecho" loading="lazy"></figure>
+          <figure class="prueba__item"><img src="img/Ramon.png" alt="Repartidor pidiendo más producto" loading="lazy"></figure>
+          <figure class="prueba__item"><img src="img/Joge.png" alt="Cliente confirmando calidad del producto" loading="lazy"></figure>
+          <figure class="prueba__item prueba__item--foto"><img src="img/cajas-huevos.jpg" alt="Cajas de huevo listas para reparto" loading="lazy"></figure>
+          <figure class="prueba__item prueba__item--foto"><img src="img/conos-huevos.jpg" alt="Producto empacado en cartón" loading="lazy"></figure>
+        </div>
       </div>
     </section>
 
@@ -268,6 +265,81 @@
           Completar mi registro →
         </a>
       </div>
+    
+    </section>
+
+    <!-- ============ FORMULARIO CALIFICADO ============ -->
+    <section class="section section--crema" id="formulario" hidden>
+      <div class="container">
+        <h2 class="section__title">Aparta tu zona, <span data-field="nombre">Saul</span></h2>
+        <p class="section__lead">Completa tus datos para coordinar tu ruta piloto.</p>
+
+        <form class="formulario" id="form-calificado" novalidate>
+          <div class="form__group">
+            <label for="f-nombre">Nombre completo</label>
+            <input type="text" id="f-nombre" name="nombre" required>
+          </div>
+
+          <div class="form__group">
+            <label for="f-whatsapp">WhatsApp</label>
+            <input type="tel" id="f-whatsapp" name="whatsapp" required inputmode="numeric">
+          </div>
+
+          <div class="form__group">
+            <label for="f-ciudad">Ciudad</label>
+            <input type="text" id="f-ciudad" name="ciudad" required>
+          </div>
+
+          <div class="form__group">
+            <label for="f-colonia">Colonia donde quieres repartir</label>
+            <input type="text" id="f-colonia" name="colonia" required placeholder="Ej: Centro, Camino Real...">
+          </div>
+
+          <div class="form__group">
+            <label>¿Listo para invertir?</label>
+            <div class="form__options">
+              <label class="form__radio"><input type="radio" name="cajas" value="1 caja" required> 1 caja</label>
+              <label class="form__radio"><input type="radio" name="cajas" value="2 cajas"> 2 cajas</label>
+              <label class="form__radio"><input type="radio" name="cajas" value="3 cajas o más"> 3 cajas o más</label>
+            </div>
+          </div>
+
+          <div class="form__group">
+            <label>¿Cuándo puedes iniciar?</label>
+            <div class="form__options">
+              <label class="form__radio"><input type="radio" name="cuando" value="De inmediato" required> De inmediato</label>
+              <label class="form__radio"><input type="radio" name="cuando" value="Esta semana"> Esta semana</label>
+            </div>
+          </div>
+
+          <button type="submit" class="cta cta--primary form__submit">Enviar y continuar →</button>
+          <p class="form__error" id="form-error" hidden></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============ GRACIAS ============ -->
+    <section class="section section--verde" id="gracias" hidden>
+      <div class="container gracias">
+        <div class="gracias__check">✅</div>
+        <h2 class="gracias__title">¡Gracias, <span data-field="nombre">Saul</span>!</h2>
+        <p class="gracias__text">
+          Tu zona en <span data-field="zona">Sayula</span> está apartada.<br>
+          Elige cómo quieres hablar con nosotros para coordinar tu ruta.
+        </p>
+
+        <div class="gracias__botones">
+          <a class="cta cta--primary gracias__btn" data-metodo="WhatsApp" href="#">
+            💬 Hablar por WhatsApp
+          </a>
+          <a class="cta cta--primary gracias__btn" data-metodo="Videollamada" href="#">
+            📹 Agendar videollamada
+          </a>
+          <a class="cta cta--primary gracias__btn" data-metodo="Visita" href="#">
+            🏠 Agendar visita a domicilio
+          </a>
+        </div>
+      </div>
     </section>
 
   </main>
@@ -281,13 +353,7 @@
     </div>
   </footer>
 
-  <!-- ============ BOTÓN WHATSAPP FLOTANTE ============ -->
-  <a class="wapp" data-cta="flotante" href="#" aria-label="Contactar por WhatsApp">
-    <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true">
-      <path d="M20.52 3.48A11.9 11.9 0 0 0 12.04 0C5.46 0 .1 5.36.1 11.94c0 2.1.55 4.15 1.6 5.96L0 24l6.28-1.65a11.9 11.9 0 0 0 5.75 1.47h.01c6.58 0 11.94-5.36 11.94-11.94 0-3.19-1.24-6.19-3.46-8.4zM12.04 21.8h-.01a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.73.98 1-3.64-.24-.37a9.87 9.87 0 0 1-1.51-5.24c0-5.46 4.44-9.9 9.9-9.9 2.64 0 5.13 1.03 7 2.9a9.84 9.84 0 0 1 2.9 7c0 5.46-4.44 9.9-9.9 9.9zm5.43-7.42c-.3-.15-1.77-.87-2.04-.97-.28-.1-.48-.15-.68.15-.2.3-.78.97-.96 1.17-.18.2-.35.22-.65.08-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.78-1.68-2.08-.18-.3-.02-.46.13-.6.13-.13.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.03-.53-.08-.15-.68-1.63-.93-2.23-.24-.58-.5-.5-.68-.51l-.58-.01c-.2 0-.53.08-.8.38-.28.3-1.05 1.03-1.05 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.18-1.42-.08-.13-.28-.2-.58-.35z"/>
-    </svg>
-  </a>
-
+  
 
   <script src="js/script.js"></script>
 </body>
