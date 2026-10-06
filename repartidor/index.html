@@ -1,1 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>HuevoBueno · Repartidor</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
 
+  <!-- ============================================================
+       LOGIN
+       ============================================================ -->
+  <main id="pantalla-login" class="pantalla-login">
+    <div class="login-logo">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="24" cy="27" rx="15" ry="19" fill="#FFFFFF"/>
+        <ellipse cx="24" cy="31" rx="7.5" ry="8.5" fill="#F5B041"/>
+        <path d="M24 8 C27 3 35 4 35 10 C30 10 26 9 24 8Z" fill="#4CAF50"/>
+      </svg>
+    </div>
+
+    <h1 class="login-titulo">HuevoBueno</h1>
+    <p class="login-subtitulo">Panel del repartidor</p>
+
+    <form id="form-login" class="login-form" autocomplete="on">
+      <label class="campo">
+        <span>Correo electrónico</span>
+        <input type="email" id="input-correo" placeholder="tu@correo.com" required autocomplete="email">
+      </label>
+      <label class="campo">
+        <span>Contraseña</span>
+        <input type="password" id="input-password" placeholder="••••••" required autocomplete="current-password">
+      </label>
+      <button type="submit" id="btn-ingresar" class="btn-primario">Iniciar sesión</button>
+      <p id="mensaje-error" class="login-error"></p>
+    </form>
+
+    <p class="login-footer">¿Problemas para entrar?<br>Contacta a tu supervisor.</p>
+  </main>
+
+  <!-- ============================================================
+       APP PRINCIPAL
+       ============================================================ -->
+  <div id="app-principal" class="app-principal hidden">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-izq">
+        <div class="logo-huevo">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="24" cy="27" rx="15" ry="19" fill="#FFFFFF"/>
+            <ellipse cx="24" cy="31" rx="7.5" ry="8.5" fill="#F5B041"/>
+            <path d="M24 8 C27 3 35 4 35 10 C30 10 26 9 24 8Z" fill="#4CAF50"/>
+          </svg>
+        </div>
+        <div class="header-textos">
+          <h1 id="header-titulo">Pedidos</h1>
+          <p id="header-subtitulo">Llevamos huevos frescos a tu comunidad</p>
+        </div>
+      </div>
+      <div class="header-acciones">
+        <button id="btn-refrescar" class="btn-con-texto" aria-label="Actualizar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"/>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+          </svg>
+          <span>Actualizar</span>
+        </button>
+        <button id="btn-perfil" class="btn-icono btn-verde" aria-label="Perfil">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 20c0-4 4-6 8-6s8 2 8 6"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- PANTALLA: PEDIDOS -->
+    <section id="pantalla-pedidos" class="pantalla">
+      <div class="contenido">
+        <p class="saludo" id="saludo-repartidor">Hola 👋</p>
+
+        <div class="resumen-card">
+          <div class="resumen-izq">
+            <div class="resumen-icono">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="1" y="7" width="14" height="10" rx="1"/>
+                <path d="M15 10h4l3 3v4h-7z"/>
+                <circle cx="6" cy="19" r="1.5"/>
+                <circle cx="18" cy="19" r="1.5"/>
+              </svg>
+            </div>
+            <div class="resumen-textos">
+              <p class="resumen-titulo" id="resumen-titulo">Cargando pedidos...</p>
+              <p class="resumen-sub" id="resumen-sub">—</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="chips" id="chips-filtro">
+          <button class="chip" data-filtro="PENDIENTE">
+            Por entregar <span class="chip-num" data-num="PENDIENTE">0</span>
+          </button>
+          <button class="chip" data-filtro="ENTREGADO">
+            Entregados <span class="chip-num" data-num="ENTREGADO">0</span>
+          </button>
+          <button class="chip" data-filtro="CANCELADO">
+            Cancelados <span class="chip-num" data-num="CANCELADO">0</span>
+          </button>
+          <button class="chip" data-filtro="NO_ENCONTRADO">
+            No encontrados <span class="chip-num" data-num="NO_ENCONTRADO">0</span>
+          </button>
+        </div>
+
+        <div class="input-busqueda">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <circle cx="11" cy="11" r="7"/>
+            <line x1="16.5" y1="16.5" x2="21" y2="21"/>
+          </svg>
+          <input type="text" id="input-busqueda" placeholder="Buscar por cliente, dirección o #pedido...">
+        </div>
+
+        <div id="lista-pedidos" class="lista-pedidos">
+          <p class="cargando">Cargando pedidos...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANTALLA: RUTAS -->
+    <section id="pantalla-rutas" class="pantalla hidden">
+      <div class="contenido">
+        <div class="input-busqueda">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <circle cx="11" cy="11" r="7"/>
+            <line x1="16.5" y1="16.5" x2="21" y2="21"/>
+          </svg>
+          <input type="text" id="input-busqueda-rutas" placeholder="Buscar colonia...">
+        </div>
+
+        <div id="lista-rutas" class="lista-rutas">
+          <p class="cargando">Cargando rutas...</p>
+        </div>
+      </div>
+    </section>
+
+    
+       <!-- PANTALLA: RENDIMIENTO -->
+    <section id="pantalla-rendimiento" class="pantalla hidden">
+      <div class="contenido">
+
+        <div class="chips" id="chips-rendimiento">
+          <button class="chip" data-periodo="semana">Esta semana</button>
+          <button class="chip activo" data-periodo="mes">Este mes</button>
+          <button class="chip" data-periodo="mes_anterior">Mes anterior</button>
+          <button class="chip" data-periodo="todos">Todos</button>
+        </div>
+
+        <div id="rendimiento-contenido">
+          <p class="cargando">Cargando rendimiento...</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PANTALLA: CAJA -->
+    <section id="pantalla-caja" class="pantalla hidden">
+      <div class="contenido">
+
+        <div class="chips" id="chips-caja">
+          <button class="chip activo" data-periodo="hoy">Hoy</button>
+          <button class="chip" data-periodo="semana">Esta semana</button>
+          <button class="chip" data-periodo="mes">Este mes</button>
+        </div>
+
+        <div id="caja-contenido">
+          <p class="cargando">Cargando caja...</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PANTALLA: HISTORIAL -->
+    <section id="pantalla-historial" class="pantalla hidden">
+      <div class="contenido">
+
+        <div class="chips" id="chips-historial">
+          <button class="chip activo" data-periodo="semana">Esta semana</button>
+          <button class="chip" data-periodo="mes">Este mes</button>
+          <button class="chip" data-periodo="todos">Todos</button>
+        </div>
+
+        <div class="input-busqueda">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <circle cx="11" cy="11" r="7"/>
+            <line x1="16.5" y1="16.5" x2="21" y2="21"/>
+          </svg>
+          <input type="text" id="input-busqueda-historial" placeholder="Buscar por cliente, colonia o #pedido...">
+        </div>
+
+        <div id="historial-contenido">
+          <p class="cargando">Cargando historial...</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <nav class="footer-nav">
+      <button class="footer-btn" data-nav="pedidos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+        </svg>
+        <span>Pedidos</span>
+      </button>
+      <button class="footer-btn" data-nav="rutas">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 21s-7-6.5-7-11a7 7 0 1 1 14 0c0 4.5-7 11-7 11z"/>
+          <circle cx="12" cy="10" r="2.5"/>
+        </svg>
+        <span>Rutas</span>
+      </button>
+      <button class="footer-btn" data-nav="rendimiento">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10"/>
+          <line x1="12" y1="20" x2="12" y2="4"/>
+          <line x1="6" y1="20" x2="6" y2="14"/>
+        </svg>
+        <span>Rendimiento</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- ============================================================
+       MODAL: DETALLE DE PEDIDO
+       ============================================================ -->
+  <div id="modal-detalle" class="modal hidden">
+    <div class="modal-contenido">
+      <button class="modal-cerrar" id="btn-cerrar-modal" aria-label="Cerrar">×</button>
+      <div id="modal-cuerpo"></div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       DRAWER LATERAL
+       ============================================================ -->
+  <div id="drawer-overlay" class="drawer-overlay hidden">
+    <aside class="drawer-panel">
+      <div class="drawer-vista">
+        <button class="drawer-cerrar" id="btn-drawer-cerrar" aria-label="Cerrar">×</button>
+
+        <div class="drawer-header">
+          <div class="drawer-avatar" id="drawer-avatar">D</div>
+          <h2 class="drawer-nombre" id="drawer-nombre">—</h2>
+          <p class="drawer-correo" id="drawer-correo">—</p>
+        </div>
+
+        <div class="drawer-menu">
+          <button class="drawer-item" data-drawer-item="soporte">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+            </svg>
+            <span>Contactar supervisor</span>
+          </button>
+
+          <button class="drawer-item" data-drawer-item="caja">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="7" width="20" height="14" rx="2"/>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+            </svg>
+            <span>Caja y ganancias</span>
+          </button>
+
+          <button class="drawer-item" data-drawer-item="historial">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 3v5h5"/>
+              <path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"/>
+              <polyline points="12 7 12 12 15 15"/>
+            </svg>
+            <span>Historial de pedidos</span>
+          </button>
+        </div>
+
+        <div class="drawer-footer">
+          <button class="drawer-item drawer-item-peligro" data-drawer-item="cerrar-sesion">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+              <polyline points="16 17 21 12 16 7"/>
+              <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+            <span>Cerrar sesión</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/login.js"></script>
+  <script src="js/pedidos.js"></script>
+</body>
+</html>
