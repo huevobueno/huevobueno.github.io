@@ -316,6 +316,7 @@ async function cargarPedidos() {
     renderizarResumen(resumen);
     renderizarChips(resumen);
     renderizarLista();
+    procesarPedidoDeURL();
 
   } catch (error) {
     console.error(error);
@@ -1265,6 +1266,37 @@ function iniciarApp(sesion) {
   filtroEstado = "PENDIENTE";
   mostrarPantalla("pedidos");
   cargarPedidos();
+}
+
+// ============================================================================
+// PROCESAR ?pedido=PED-XXX DE LA URL
+// ============================================================================
+function procesarPedidoDeURL() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const pedidoId = params.get("pedido");
+
+    if (!pedidoId) return;
+
+    // Buscar el pedido en la lista cargada
+    const p = pedidosActuales.find(x => x.id === pedidoId);
+
+    if (!p) {
+      console.log("Pedido no encontrado: " + pedidoId);
+      // Limpiar el parámetro de la URL para no confundir
+      window.history.replaceState({}, "", window.location.pathname);
+      return;
+    }
+
+    // Abrir el modal con ese pedido
+    abrirModalDetalle(pedidoId);
+
+    // Limpiar el parámetro de la URL
+    window.history.replaceState({}, "", window.location.pathname);
+
+  } catch (e) {
+    console.error("Error procesando pedido de URL:", e);
+  }
 }
 
 // ============================================================================
