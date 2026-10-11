@@ -16,16 +16,13 @@
 
   <link rel="stylesheet" href="css/estilos.css">
 </head>
-<body>
+<body class="modo-admin">
 
   <!-- LOGIN -->
   <main id="pantalla-login" class="pantalla-login">
+    <div class="login-badge">🔒 Panel Admin</div>
     <div class="login-logo">
-      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="24" cy="27" rx="15" ry="19" fill="#FFFFFF"/>
-        <ellipse cx="24" cy="31" rx="7.5" ry="8.5" fill="#F5B041"/>
-        <path d="M24 8 C27 3 35 4 35 10 C30 10 26 9 24 8Z" fill="#4CAF50"/>
-      </svg>
+      <img src="img/logo.png" alt="HuevoBueno">
     </div>
     <h1 class="login-titulo">HuevoBueno</h1>
     <p class="login-subtitulo">Panel del administrador</p>
@@ -51,11 +48,7 @@
     <header class="header">
       <div class="header-izq">
         <div class="logo-huevo">
-          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="24" cy="27" rx="15" ry="19" fill="#FFFFFF"/>
-            <ellipse cx="24" cy="31" rx="7.5" ry="8.5" fill="#F5B041"/>
-            <path d="M24 8 C27 3 35 4 35 10 C30 10 26 9 24 8Z" fill="#4CAF50"/>
-          </svg>
+          <img src="img/logo.png" alt="HuevoBueno">
         </div>
         <div class="header-textos">
           <h1 id="header-titulo">Dashboard</h1>
@@ -157,7 +150,7 @@
               </select>
             </label>
 
-            <!-- Campos personales (siempre visibles) -->
+            <!-- Campos personales -->
             <div id="rep-campos-personales" class="hidden">
               <label class="campo">
                 <span>Nombre completo *</span>
@@ -180,7 +173,7 @@
               </label>
             </div>
 
-            <!-- Ciudad libre (solo si eligió "Otro") -->
+            <!-- Ciudad libre -->
             <div id="rep-ciudad-libre" class="hidden">
               <label class="campo">
                 <span>¿Cuál es tu ciudad? *</span>
@@ -188,7 +181,7 @@
               </label>
             </div>
 
-            <!-- Sección: colonias (según ciudad) -->
+            <!-- Sección: colonias -->
             <div id="rep-seccion-colonias" class="hidden">
               <div class="config-seccion-titulo">Colonias asignadas</div>
               <p class="config-seccion-sub" id="rep-colonias-sub">Selecciona las colonias.</p>
@@ -205,9 +198,9 @@
             <!-- Sección: mensaje cuando no hay colonias -->
             <div id="rep-mensaje-sin-colonias" class="hidden">
               <div class="info-box">
-                <div class="info-box-icono">📭</div>
-                <p class="info-box-titulo">Aún no repartimos en esta ciudad</p>
-                <p class="info-box-texto">Déjanos tus datos y te avisaremos cuando abramos ruta en tu zona.</p>
+                <div class="info-box-icono" id="rep-info-icono">📭</div>
+                <p class="info-box-titulo" id="rep-info-titulo">Aún no repartimos en esta ciudad</p>
+                <p class="info-box-texto" id="rep-info-texto">Déjanos tus datos y te avisaremos cuando abramos ruta en tu zona.</p>
               </div>
 
               <label class="campo">
@@ -290,7 +283,7 @@
           </select>
         </label>
 
-        <!-- Ciudad libre (solo si "Otro") -->
+        <!-- Ciudad libre -->
         <div id="col-ciudad-libre" class="hidden">
           <label class="campo">
             <span>¿Cuál es la ciudad? *</span>
