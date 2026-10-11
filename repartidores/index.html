@@ -6,8 +6,8 @@
   <meta name="theme-color" content="#F5B041">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="Repartidor">
-  <title>HuevoBueno · Repartidor</title>
+  <meta name="apple-mobile-web-app-title" content="Emprendedor">
+  <title>HuevoBueno · Emprendedor</title>
 
   <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
@@ -18,20 +18,16 @@
 </head>
 <body>
 
-  <!-- ============================================================
-       LOGIN
-       ============================================================ -->
+  <!-- LOGIN -->
   <main id="pantalla-login" class="pantalla-login">
+    <div class="login-badge">🥚 Emprendedor</div>
+
     <div class="login-logo">
-      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="24" cy="27" rx="15" ry="19" fill="#FFFFFF"/>
-        <ellipse cx="24" cy="31" rx="7.5" ry="8.5" fill="#F5B041"/>
-        <path d="M24 8 C27 3 35 4 35 10 C30 10 26 9 24 8Z" fill="#4CAF50"/>
-      </svg>
+      <img src="img/logo.png" alt="HuevoBueno">
     </div>
 
     <h1 class="login-titulo">HuevoBueno</h1>
-    <p class="login-subtitulo">Panel del repartidor</p>
+    <p class="login-subtitulo">Panel del emprendedor</p>
 
     <form id="form-login" class="login-form" autocomplete="on">
       <label class="campo">
@@ -46,23 +42,17 @@
       <p id="mensaje-error" class="login-error"></p>
     </form>
 
-    <p class="login-footer">¿Problemas para entrar?<br>Contacta a tu supervisor.</p>
+    <p class="login-footer">¿Problemas para entrar?<br>Contacta a HuevoBueno.</p>
   </main>
 
-  <!-- ============================================================
-       APP PRINCIPAL
-       ============================================================ -->
+  <!-- APP -->
   <div id="app-principal" class="app-principal hidden">
 
     <!-- HEADER -->
     <header class="header">
       <div class="header-izq">
         <div class="logo-huevo">
-          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="24" cy="27" rx="15" ry="19" fill="#FFFFFF"/>
-            <ellipse cx="24" cy="31" rx="7.5" ry="8.5" fill="#F5B041"/>
-            <path d="M24 8 C27 3 35 4 35 10 C30 10 26 9 24 8Z" fill="#4CAF50"/>
-          </svg>
+          <img src="img/logo.png" alt="HuevoBueno">
         </div>
         <div class="header-textos">
           <h1 id="header-titulo">Pedidos</h1>
@@ -154,11 +144,9 @@
       </div>
     </section>
 
-    
-       <!-- PANTALLA: RENDIMIENTO -->
+    <!-- PANTALLA: RENDIMIENTO -->
     <section id="pantalla-rendimiento" class="pantalla hidden">
       <div class="contenido">
-
         <div class="chips" id="chips-rendimiento">
           <button class="chip" data-periodo="semana">Esta semana</button>
           <button class="chip activo" data-periodo="mes">Este mes</button>
@@ -169,14 +157,12 @@
         <div id="rendimiento-contenido">
           <p class="cargando">Cargando rendimiento...</p>
         </div>
-
       </div>
     </section>
 
     <!-- PANTALLA: CAJA -->
     <section id="pantalla-caja" class="pantalla hidden">
       <div class="contenido">
-
         <div class="chips" id="chips-caja">
           <button class="chip activo" data-periodo="hoy">Hoy</button>
           <button class="chip" data-periodo="semana">Esta semana</button>
@@ -186,14 +172,12 @@
         <div id="caja-contenido">
           <p class="cargando">Cargando caja...</p>
         </div>
-
       </div>
     </section>
 
     <!-- PANTALLA: HISTORIAL -->
     <section id="pantalla-historial" class="pantalla hidden">
       <div class="contenido">
-
         <div class="chips" id="chips-historial">
           <button class="chip activo" data-periodo="semana">Esta semana</button>
           <button class="chip" data-periodo="mes">Este mes</button>
@@ -211,7 +195,6 @@
         <div id="historial-contenido">
           <p class="cargando">Cargando historial...</p>
         </div>
-
       </div>
     </section>
 
@@ -244,9 +227,7 @@
     </nav>
   </div>
 
-  <!-- ============================================================
-       MODAL: DETALLE DE PEDIDO
-       ============================================================ -->
+  <!-- MODAL DETALLE -->
   <div id="modal-detalle" class="modal hidden">
     <div class="modal-contenido">
       <button class="modal-cerrar" id="btn-cerrar-modal" aria-label="Cerrar">×</button>
@@ -254,9 +235,7 @@
     </div>
   </div>
 
-  <!-- ============================================================
-       DRAWER LATERAL
-       ============================================================ -->
+  <!-- DRAWER -->
   <div id="drawer-overlay" class="drawer-overlay hidden">
     <aside class="drawer-panel">
       <div class="drawer-vista">
@@ -273,7 +252,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
             </svg>
-            <span>Contactar supervisor</span>
+            <span>Contactar a HuevoBueno</span>
           </button>
 
           <button class="drawer-item" data-drawer-item="caja">
@@ -308,7 +287,6 @@
     </aside>
   </div>
 
-  <!-- Scripts -->
   <script src="js/config.js"></script>
   <script src="js/api.js"></script>
   <script src="js/login.js"></script>
