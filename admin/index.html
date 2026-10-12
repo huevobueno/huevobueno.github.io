@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#1B5E20">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Admin">
+  <title>HuevoBueno · Admin</title>
+
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="modo-admin">
+
+  <!-- LOGIN -->
+  <main id="pantalla-login" class="pantalla-login">
+    <div class="login-badge">🔒 Panel Admin</div>
+    <div class="login-logo">
+      <img src="img/logo.png" alt="HuevoBueno">
+    </div>
+    <h1 class="login-titulo">HuevoBueno</h1>
+    <p class="login-subtitulo">Panel del administrador</p>
+
+    <form id="form-login" class="login-form">
+      <label class="campo">
+        <span>Correo</span>
+        <input type="email" id="input-correo" required autocomplete="email" placeholder="admin@huevobueno.com">
+      </label>
+      <label class="campo">
+        <span>Contraseña</span>
+        <input type="password" id="input-password" required autocomplete="current-password" placeholder="••••••">
+      </label>
+      <button type="submit" id="btn-ingresar" class="btn-primario">Iniciar sesión</button>
+      <p id="mensaje-error" class="login-error"></p>
+    </form>
+  </main>
+
+  <!-- APP -->
+  <div id="app-principal" class="app-principal hidden">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-izq">
+        <div class="logo-huevo">
+          <img src="img/logo.png" alt="HuevoBueno">
+        </div>
+        <div class="header-textos">
+          <h1 id="header-titulo">Dashboard</h1>
+          <p id="header-subtitulo">Resumen de tu negocio</p>
+        </div>
+      </div>
+      <div class="header-acciones">
+        <button id="btn-refrescar" class="btn-con-texto" aria-label="Actualizar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"/>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+          </svg>
+          <span>Actualizar</span>
+        </button>
+        <div class="menu-wrapper">
+          <button id="btn-menu" class="btn-icono btn-verde" aria-label="Menú">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <line x1="3" y1="12" x2="21" y2="12"/>
+              <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+          </button>
+          <div id="menu-dropdown" class="menu-dropdown hidden">
+            <button class="menu-item" data-menu="compras-emprendedor">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+              </svg>
+              <span>Compras emprendedor</span>
+            </button>
+            <button class="menu-item" data-menu="compras-granja">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 21h18"/>
+                <path d="M5 21V7l8-4v18"/>
+                <path d="M19 21V11l-6-4"/>
+              </svg>
+              <span>Compras a granja</span>
+            </button>
+            <button class="menu-item" data-menu="gastos">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="2"/>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+              </svg>
+              <span>Gastos</span>
+            </button>
+            <button class="menu-item" data-menu="ganancias">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="1" x2="12" y2="23"/>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              </svg>
+              <span>Ganancias</span>
+            </button>
+            <button class="menu-item" data-menu="rendimiento">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="20" x2="18" y2="10"/>
+                <line x1="12" y1="20" x2="12" y2="4"/>
+                <line x1="6" y1="20" x2="6" y2="14"/>
+              </svg>
+              <span>Rendimiento</span>
+            </button>
+            <button class="menu-item" data-menu="historial">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 3v5h5"/>
+                <path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"/>
+                <polyline points="12 7 12 12 15 15"/>
+              </svg>
+              <span>Historial de pedidos</span>
+            </button>
+            <button class="menu-item menu-item-peligro" data-menu="cerrar-sesion">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                <polyline points="16 17 21 12 16 7"/>
+                <line x1="21" y1="12" x2="9" y2="12"/>
+              </svg>
+              <span>Cerrar sesión</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- PANTALLA: DASHBOARD -->
+    <section id="pantalla-dashboard" class="pantalla">
+      <div class="contenido">
+        <div class="chips" id="chips-dashboard">
+          <button class="chip activo" data-periodo="hoy">Hoy</button>
+          <button class="chip" data-periodo="semana">Esta semana</button>
+          <button class="chip" data-periodo="mes">Este mes</button>
+        </div>
+
+        <div id="dashboard-contenido">
+          <p class="cargando">Cargando...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANTALLA: REPARTIDORES -->
+    <section id="pantalla-repartidores" class="pantalla hidden">
+      <div class="contenido">
+        <div id="repartidores-contenido">
+          <p class="cargando">Cargando...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANTALLA: DETALLE EMPRENDEDOR -->
+    <section id="pantalla-detalle-repartidor" class="pantalla hidden">
+      <div class="contenido">
+        <button class="btn-volver-config" id="btn-volver-detalle">← Volver</button>
+        <div id="detalle-contenido">
+          <p class="cargando">Cargando...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANTALLA: CONFIG -->
+    <section id="pantalla-config" class="pantalla hidden">
+      <div class="contenido">
+
+        <div id="config-menu">
+          <div class="config-opciones">
+            <button class="config-opcion" data-config="nuevo-repartidor">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="8" r="3"/>
+                <path d="M3 20c0-3 3-5 6-5s6 2 6 5"/>
+                <line x1="19" y1="8" x2="19" y2="14"/>
+                <line x1="16" y1="11" x2="22" y2="11"/>
+              </svg>
+              <div>
+                <div class="config-opcion-titulo">Nuevo repartidor</div>
+                <div class="config-opcion-sub">Registrar emprendedor y asignar colonias</div>
+              </div>
+            </button>
+
+            <button class="config-opcion" data-config="ciudades">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 21h18"/>
+                <path d="M5 21V7l8-4v18"/>
+                <path d="M19 21V11l-6-4"/>
+              </svg>
+              <div>
+                <div class="config-opcion-titulo">Ciudades registradas</div>
+                <div class="config-opcion-sub">Colonias agrupadas por ciudad</div>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Vista: Nuevo repartidor -->
+        <div id="config-nuevo-repartidor" class="hidden">
+          <button class="btn-volver-config" id="btn-volver-config-1">← Volver</button>
+
+          <h3 class="config-titulo">Nuevo repartidor</h3>
+          <p class="config-sub">Selecciona la ciudad, completa datos y elige colonias.</p>
+
+          <form id="form-nuevo-repartidor" class="config-form">
+            <label class="campo">
+              <span>Ciudad *</span>
+              <select id="rep-ciudad" required>
+                <option value="">Cargando ciudades...</option>
+              </select>
+            </label>
+
+            <div id="rep-campos-personales" class="hidden">
+              <label class="campo">
+                <span>Nombre completo *</span>
+                <input type="text" id="rep-nombre" required placeholder="Ej. Juan Pérez">
+              </label>
+
+              <label class="campo">
+                <span>Correo electrónico *</span>
+                <input type="email" id="rep-correo" required placeholder="juan@correo.com">
+              </label>
+
+              <label class="campo">
+                <span>Contraseña *</span>
+                <input type="text" id="rep-password" required placeholder="Al menos 6 caracteres">
+              </label>
+
+              <label class="campo">
+                <span>WhatsApp *</span>
+                <input type="tel" id="rep-whatsapp" required placeholder="523325110628">
+              </label>
+            </div>
+
+            <div id="rep-ciudad-libre" class="hidden">
+              <label class="campo">
+                <span>¿Cuál es tu ciudad? *</span>
+                <input type="text" id="rep-ciudad-otro" placeholder="Ej. Tlaquepaque">
+              </label>
+            </div>
+
+            <div id="rep-seccion-colonias" class="hidden">
+              <div class="config-seccion-titulo">Colonias asignadas</div>
+              <p class="config-seccion-sub" id="rep-colonias-sub">Selecciona las colonias.</p>
+
+              <div id="lista-checkbox-colonias" class="lista-checkbox">
+                <p class="vacio" style="padding:16px;text-align:center;font-size:12px;">Cargando colonias...</p>
+              </div>
+
+              <button type="button" id="btn-abrir-modal-colonia" class="btn-secundario-config">
+                + Agregar colonia nueva
+              </button>
+            </div>
+
+            <div id="rep-mensaje-sin-colonias" class="hidden">
+              <div class="info-box">
+                <div class="info-box-icono" id="rep-info-icono">📭</div>
+                <p class="info-box-titulo" id="rep-info-titulo">Aún no repartimos en esta ciudad</p>
+                <p class="info-box-texto" id="rep-info-texto">Registra los datos del interesado y le avisaremos cuando abramos ruta.</p>
+              </div>
+
+              <label class="campo">
+                <span>¿Cuál es tu colonia? (opcional)</span>
+                <input type="text" id="rep-colonia-espera" placeholder="Ej. Centro">
+              </label>
+            </div>
+
+            <button type="submit" id="btn-accion-repartidor" class="btn-primario disabled">
+              Completa los datos
+            </button>
+            <p id="msg-nuevo-repartidor" class="login-error"></p>
+          </form>
+        </div>
+
+        <!-- Vista: Ciudades -->
+        <div id="config-ciudades" class="hidden">
+          <button class="btn-volver-config" id="btn-volver-config-2">← Volver</button>
+
+          <div class="config-ciudades-header">
+            <div>
+              <h3 class="config-titulo">Ciudades registradas</h3>
+              <p class="config-sub" id="ciudades-count">—</p>
+            </div>
+            <button id="btn-registrar-ciudad" class="btn-registrar-ciudad">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+              <span>Registrar ciudad</span>
+            </button>
+          </div>
+
+          <div class="chips" id="chips-ciudades"></div>
+
+          <div id="lista-colonias" class="lista-colonias" style="margin-top:14px;">
+            <p class="cargando">Cargando colonias...</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PANTALLA: COMPRAS EMPRENDEDOR -->
+    <section id="pantalla-compras-emprendedor" class="pantalla hidden">
+      <div class="contenido">
+        <button class="btn-volver-config" id="btn-volver-compras-emprendedor">← Volver</button>
+        <h3 class="config-titulo">Compras emprendedor</h3>
+        <p class="config-sub">Registra la compra de cajas que hizo un emprendedor</p>
+
+        <form id="form-compra-emprendedor" class="config-form">
+          <label class="campo">
+            <span>Fecha *</span>
+            <input type="date" id="ce-fecha" required>
+          </label>
+
+          <label class="campo">
+            <span>Emprendedor *</span>
+            <select id="ce-emprendedor" required>
+              <option value="">Cargando...</option>
+            </select>
+          </label>
+
+          <div class="config-doble">
+            <label class="campo">
+              <span>Cajas blancas</span>
+              <input type="number" id="ce-cajas-blancas" min="0" value="0">
+            </label>
+            <label class="campo">
+              <span>Cajas rojas</span>
+              <input type="number" id="ce-cajas-rojas" min="0" value="0">
+            </label>
+          </div>
+
+          <div class="config-doble">
+            <label class="campo">
+              <span>$ Precio blanco</span>
+              <input type="number" id="ce-precio-blanco" min="0" value="0">
+            </label>
+            <label class="campo">
+              <span>$ Precio rojo</span>
+              <input type="number" id="ce-precio-rojo" min="0" value="0">
+            </label>
+          </div>
+
+          <label class="campo">
+            <span>Monto pagado</span>
+            <input type="number" id="ce-monto-pagado" min="0" value="0">
+          </label>
+
+          <div class="cierre-resumen">
+            <div class="cierre-resumen-fila">
+              <span class="label">Total</span>
+              <span class="valor" id="ce-total">$0</span>
+            </div>
+            <div class="cierre-resumen-fila">
+              <span class="label">Saldo pendiente</span>
+              <span class="valor" id="ce-saldo">$0</span>
+            </div>
+          </div>
+
+          <label class="campo">
+            <span>Notas (opcional)</span>
+            <textarea id="ce-notas" rows="2" placeholder="Ej. compra de la mañana"></textarea>
+          </label>
+
+          <button type="submit" id="btn-guardar-compra-emprendedor" class="btn-primario">Guardar compra</button>
+          <p id="msg-compra-emprendedor" class="login-error"></p>
+        </form>
+
+        <div class="config-seccion-titulo" style="margin-top:22px;">Últimas compras</div>
+        <div id="lista-compras-emprendedor" class="lista-compras">
+          <p class="cargando">Cargando compras...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANTALLA: COMPRAS GRANJA -->
+    <section id="pantalla-compras-granja" class="pantalla hidden">
+      <div class="contenido">
+        <button class="btn-volver-config" id="btn-volver-compras-granja">← Volver</button>
+        <h3 class="config-titulo">Compras a granja</h3>
+        <p class="config-sub">Registra lo que le compraste a la granja</p>
+
+        <form id="form-compra-granja" class="config-form">
+          <label class="campo">
+            <span>Fecha *</span>
+            <input type="date" id="cg-fecha" required>
+          </label>
+
+          <label class="campo">
+            <span>Proveedor *</span>
+            <input type="text" id="cg-proveedor" required placeholder="Ej. Granja X">
+          </label>
+
+          <div class="config-doble">
+            <label class="campo">
+              <span>Cajas blancas</span>
+              <input type="number" id="cg-cajas-blancas" min="0" value="0">
+            </label>
+            <label class="campo">
+              <span>Cajas rojas</span>
+              <input type="number" id="cg-cajas-rojas" min="0" value="0">
+            </label>
+          </div>
+
+          <div class="config-doble">
+            <label class="campo">
+              <span>$ Precio compra blanco</span>
+              <input type="number" id="cg-precio-blanco" min="0" value="0">
+            </label>
+            <label class="campo">
+              <span>$ Precio compra rojo</span>
+              <input type="number" id="cg-precio-rojo" min="0" value="0">
+            </label>
+          </div>
+
+          <label class="campo">
+            <span>Monto pagado</span>
+            <input type="number" id="cg-monto-pagado" min="0" value="0">
+          </label>
+
+          <div class="cierre-resumen">
+            <div class="cierre-resumen-fila">
+              <span class="label">Total</span>
+              <span class="valor" id="cg-total">$0</span>
+            </div>
+            <div class="cierre-resumen-fila">
+              <span class="label">Saldo pendiente</span>
+              <span class="valor" id="cg-saldo">$0</span>
+            </div>
+          </div>
+
+          <label class="campo">
+            <span>Notas (opcional)</span>
+            <textarea id="cg-notas" rows="2" placeholder="Ej. compra semanal"></textarea>
+          </label>
+
+          <button type="submit" id="btn-guardar-compra-granja" class="btn-primario">Guardar compra</button>
+          <p id="msg-compra-granja" class="login-error"></p>
+        </form>
+
+        <div class="config-seccion-titulo" style="margin-top:22px;">Últimas compras</div>
+        <div id="lista-compras-granja" class="lista-compras">
+          <p class="cargando">Cargando compras...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANTALLA: GASTOS -->
+    <section id="pantalla-gastos" class="pantalla hidden">
+      <div class="contenido">
+        <button class="btn-volver-config" id="btn-volver-gastos">← Volver</button>
+        <h3 class="config-titulo">Gastos</h3>
+        <p class="config-sub">Registra los gastos operativos (gasolina, refacciones, etc.)</p>
+
+        <form id="form-gasto" class="config-form">
+          <label class="campo">
+            <span>Fecha *</span>
+            <input type="date" id="g-fecha" required>
+          </label>
+
+          <label class="campo">
+            <span>Categoría *</span>
+            <input type="text" id="g-categoria" required placeholder="Ej. Gasolina">
+          </label>
+
+          <label class="campo">
+            <span>Concepto</span>
+            <input type="text" id="g-concepto" placeholder="Ej. Carga camioneta">
+          </label>
+
+          <label class="campo">
+            <span>Monto *</span>
+            <input type="number" id="g-monto" required min="1" placeholder="0">
+          </label>
+
+          <label class="campo">
+            <span>Notas (opcional)</span>
+            <textarea id="g-notas" rows="2" placeholder="Ej. ruta Sayula"></textarea>
+          </label>
+
+          <button type="submit" id="btn-guardar-gasto" class="btn-primario">Guardar gasto</button>
+          <p id="msg-gasto" class="login-error"></p>
+        </form>
+
+        <div class="config-seccion-titulo" style="margin-top:22px;">Últimos gastos</div>
+        <div id="lista-gastos" class="lista-compras">
+          <p class="cargando">Cargando gastos...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANTALLA: GANANCIAS -->
+    <section id="pantalla-ganancias" class="pantalla hidden">
+      <div class="contenido">
+        <button class="btn-volver-config" id="btn-volver-ganancias">← Volver</button>
+        <h3 class="config-titulo">Ganancias</h3>
+        <p class="config-sub">Tu resumen y actividad reciente</p>
+
+        <div class="chips" id="chips-ganancias">
+          <button class="chip activo" data-periodo="hoy">Hoy</button>
+          <button class="chip" data-periodo="semana">Esta semana</button>
+          <button class="chip" data-periodo="mes">Este mes</button>
+        </div>
+
+        <div id="ganancias-resumen">
+          <p class="cargando">Cargando...</p>
+        </div>
+
+        <div class="config-seccion-titulo" style="margin-top:14px;">Actividad reciente</div>
+        <div id="ganancias-feed" class="lista-feed">
+          <p class="cargando">Cargando actividad...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANTALLA: RENDIMIENTO -->
+    <section id="pantalla-rendimiento" class="pantalla hidden">
+      <div class="contenido">
+        <button class="btn-volver-config" id="btn-volver-rendimiento">← Volver</button>
+        <h3 class="config-titulo">Rendimiento</h3>
+        <p class="config-sub">Monitorea el desempeño de tus emprendedores</p>
+
+        <div class="chips" id="chips-rendimiento-emprendedor">
+          <button class="chip activo" data-correo="">Todos</button>
+        </div>
+
+        <div class="chips" id="chips-rendimiento-periodo">
+          <button class="chip" data-periodo="semana">Esta semana</button>
+          <button class="chip activo" data-periodo="mes">Este mes</button>
+          <button class="chip" data-periodo="mes_anterior">Mes anterior</button>
+          <button class="chip" data-periodo="todos">Todos</button>
+        </div>
+
+        <div id="rendimiento-contenido">
+          <p class="cargando">Cargando rendimiento...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANTALLA: HISTORIAL DE PEDIDOS -->
+    <section id="pantalla-historial" class="pantalla hidden">
+      <div class="contenido">
+        <button class="btn-volver-config" id="btn-volver-historial">← Volver</button>
+        <h3 class="config-titulo">Historial de pedidos</h3>
+        <p class="config-sub">Pedidos entregados por tus emprendedores</p>
+
+        <div class="chips" id="chips-historial-emprendedor">
+          <button class="chip activo" data-correo="">Todos</button>
+        </div>
+
+        <div class="chips" id="chips-historial-periodo">
+          <button class="chip activo" data-periodo="semana">Esta semana</button>
+          <button class="chip" data-periodo="mes">Este mes</button>
+          <button class="chip" data-periodo="todos">Todos</button>
+        </div>
+
+        <div id="historial-contenido">
+          <p class="cargando">Cargando historial...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <nav class="footer-nav">
+      <button class="footer-btn activo" data-nav="dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="9"/>
+          <rect x="14" y="3" width="7" height="5"/>
+          <rect x="14" y="12" width="7" height="9"/>
+          <rect x="3" y="16" width="7" height="5"/>
+        </svg>
+        <span>Dashboard</span>
+      </button>
+      <button class="footer-btn" data-nav="repartidores">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="8" r="3"/>
+          <circle cx="17" cy="9" r="2"/>
+          <path d="M3 20c0-3 3-5 6-5s6 2 6 5"/>
+          <path d="M17 20c0-2 1-3 2.5-3.5"/>
+        </svg>
+        <span>Repartidores</span>
+      </button>
+      <button class="footer-btn" data-nav="config">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+        <span>Config</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- MODAL: NUEVA COLONIA -->
+  <div id="modal-colonia" class="modal hidden">
+    <div class="modal-contenido">
+      <button class="modal-cerrar" id="btn-cerrar-modal-colonia" aria-label="Cerrar">×</button>
+
+      <h3 class="config-titulo" id="modal-colonia-titulo">Agregar colonia</h3>
+      <p class="config-sub" id="modal-colonia-sub">Completa los datos de la colonia.</p>
+
+      <form id="form-nueva-colonia" class="config-form">
+        <label class="campo">
+          <span>Ciudad *</span>
+          <select id="col-municipio" required>
+            <option value="">Cargando...</option>
+          </select>
+        </label>
+
+        <div id="col-ciudad-libre" class="hidden">
+          <label class="campo">
+            <span>¿Cuál es la ciudad? *</span>
+            <input type="text" id="col-ciudad-otro" placeholder="Ej. Tlaquepaque">
+          </label>
+        </div>
+
+        <label class="campo">
+          <span>Nombre de la colonia *</span>
+          <input type="text" id="col-nombre" required placeholder="Ej. Juan Rulfo">
+        </label>
+
+        <label class="campo">
+          <span>Código postal</span>
+          <input type="text" id="col-cp" placeholder="49300">
+        </label>
+
+        <label class="campo">
+          <span>Día de entrega</span>
+          <input type="text" id="col-dia" placeholder="Ej. lunes">
+        </label>
+
+        <button type="submit" id="btn-guardar-colonia" class="btn-primario">Guardar colonia</button>
+        <p id="msg-nueva-colonia" class="login-error"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: REGISTRAR CIUDAD -->
+  <div id="modal-ciudad" class="modal hidden">
+    <div class="modal-contenido">
+      <button class="modal-cerrar" id="btn-cerrar-modal-ciudad" aria-label="Cerrar">×</button>
+
+      <h3 class="config-titulo">Registrar ciudad</h3>
+      <p class="config-sub">Crea una ciudad nueva con su primera colonia.</p>
+
+      <form id="form-nueva-ciudad" class="config-form">
+        <label class="campo">
+          <span>Municipio *</span>
+          <input type="text" id="ci-municipio" required placeholder="Ej. Colima">
+        </label>
+
+        <div class="config-doble">
+          <label class="campo">
+            <span>$ Precio blanco *</span>
+            <input type="number" id="ci-precio-blanco" required min="1" value="70">
+          </label>
+          <label class="campo">
+            <span>$ Precio rojo *</span>
+            <input type="number" id="ci-precio-rojo" required min="1" value="95">
+          </label>
+        </div>
+
+        <label class="campo">
+          <span>Primera colonia *</span>
+          <input type="text" id="ci-colonia" required placeholder="Ej. Centro">
+        </label>
+
+        <label class="campo">
+          <span>Código postal</span>
+          <input type="text" id="ci-cp" placeholder="28000">
+        </label>
+
+        <button type="submit" id="btn-guardar-ciudad" class="btn-primario">Guardar ciudad</button>
+        <p id="msg-nueva-ciudad" class="login-error"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: EDITAR PRECIOS DE CIUDAD -->
+  <div id="modal-precios" class="modal hidden">
+    <div class="modal-contenido">
+      <button class="modal-cerrar" id="btn-cerrar-modal-precios" aria-label="Cerrar">×</button>
+
+      <h3 class="config-titulo" id="precios-titulo">Editar precios</h3>
+      <p class="config-sub" id="precios-sub">Actualiza el precio global de esta ciudad.</p>
+
+      <form id="form-editar-precios" class="config-form">
+        <label class="campo">
+          <span>$ Precio blanco *</span>
+          <input type="number" id="pr-precio-blanco" required min="1">
+        </label>
+        <label class="campo">
+          <span>$ Precio rojo *</span>
+          <input type="number" id="pr-precio-rojo" required min="1">
+        </label>
+
+        <div class="info-box">
+          <p class="info-box-texto">Este cambio se aplica a <strong>todas las colonias</strong> de la ciudad.</p>
+        </div>
+
+        <button type="submit" id="btn-guardar-precios" class="btn-primario">Guardar precios</button>
+        <p id="msg-editar-precios" class="login-error"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: DETALLE DE FEED -->
+  <div id="modal-detalle" class="modal hidden">
+    <div class="modal-contenido">
+      <button class="modal-cerrar" id="btn-cerrar-modal-detalle" aria-label="Cerrar">×</button>
+      <div id="modal-detalle-cuerpo"></div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/login.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
