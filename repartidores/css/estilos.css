@@ -480,8 +480,9 @@ body {
   inset: 0;
   background: rgba(0,0,0,0.55);
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
+  padding: 16px;
   z-index: 100;
   animation: fadeIn 0.15s ease-out;
 }
@@ -490,15 +491,18 @@ body {
 .modal-contenido {
   background: #FFFFFF;
   width: 100%;
-  max-width: 480px;
-  border-radius: 20px 20px 0 0;
-  padding: 24px 20px 28px;
+  max-width: 440px;
+  border-radius: 20px;
+  padding: 24px 20px 24px;
   max-height: 85vh;
   overflow-y: auto;
   position: relative;
-  animation: slideUp 0.2s ease-out;
+  animation: scaleIn 0.2s ease-out;
 }
-@keyframes slideUp { from { transform: translateY(20px); opacity: 0.6; } to { transform: translateY(0); opacity: 1; } }
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0.6; }
+  to   { transform: scale(1);    opacity: 1; }
+}
 
 .modal-cerrar {
   position: absolute;
